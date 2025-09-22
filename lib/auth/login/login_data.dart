@@ -10,4 +10,9 @@ class LoginData extends FormData {
     username.dispose();
     password.dispose();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {'username': username.text, 'password': password.text};
+  }
 }

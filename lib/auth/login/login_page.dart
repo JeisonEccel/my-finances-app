@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:my_finances_app/auth/login/login_data.dart';
+import 'package:my_finances_app/auth/login/login_response.dart';
 import 'package:my_finances_app/core/forms/form.dart';
 import 'package:my_finances_app/core/forms/form_button.dart';
 import 'package:my_finances_app/core/forms/form_password_field.dart';
 import 'package:my_finances_app/core/forms/form_text_field.dart';
 import 'package:my_finances_app/core/forms/form_gap.dart';
 import 'package:my_finances_app/core/forms/form_title.dart';
+import 'package:my_finances_app/requests/api_request.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -43,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           FormGap(),
           FormButton(text: 'Login', onPressed: login(loginData)),
+          // TODO: Add "Sign Up" button
         ],
       ),
     );
@@ -50,10 +55,13 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 VoidCallback login(LoginData loginData) {
-  return () {
-    // TODO: Implement login logic
-    print(
-      'Login with ${loginData.username.text} and ${loginData.password.text}',
+  return () async {
+    final response = await ApiRequest.post('/auth/login', loginData);
+    final LoginResponse loginResponse = LoginResponse.fromJson(
+      jsonDecode(response.body) as Map<String, dynamic>,
     );
+    print('Access Token: ${loginResponse.accessToken}');
+    print('Refresh Token: ${loginResponse.refreshToken}');
+    // TODO: Save tokens and navigate to home page
   };
 }
