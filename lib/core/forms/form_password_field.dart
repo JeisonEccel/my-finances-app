@@ -7,11 +7,13 @@ class FormPasswordField extends StatefulWidget {
     this.label,
     this.hintText,
     this.controller,
+    this.errorText,
   });
 
   final String? label;
   final String? hintText;
   final TextEditingController? controller;
+  final String? errorText;
 
   @override
   State<FormPasswordField> createState() => _FormPasswordFieldState();
@@ -25,6 +27,7 @@ class _FormPasswordFieldState extends State<FormPasswordField> {
       label: widget.label,
       hintText: widget.hintText,
       obscureText: true,
+      errorText: widget.errorText,
     );
   }
 }
