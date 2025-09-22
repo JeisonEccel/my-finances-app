@@ -64,8 +64,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _handleLogin() async {
     try {
-      final loginResponse = await LoginService().login(loginData);
-      await LoginService().storeTokens(loginResponse);
+      await LoginService().login(loginData);
 
       if (!mounted) return;
 
