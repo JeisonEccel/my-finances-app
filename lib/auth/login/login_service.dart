@@ -1,6 +1,6 @@
+import 'package:my_finances_app/auth/logged_user.dart';
 import 'package:my_finances_app/auth/login/login_data.dart';
 import 'package:my_finances_app/requests/api_request.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginService {
   Future<void> login(LoginData loginData) async {
@@ -9,8 +9,7 @@ class LoginService {
   }
 
   Future<void> storeTokens(Map<String, dynamic> response) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('accessToken', response['accessToken'] as String);
-    await prefs.setString('refreshToken', response['refreshToken'] as String);
+    LoggedUser.instance.setAccessToken(response['accessToken'] as String);
+    LoggedUser.instance.setRefreshToken(response['refreshToken'] as String);
   }
 }
