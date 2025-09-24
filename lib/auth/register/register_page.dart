@@ -8,6 +8,7 @@ import 'package:my_finances_app/core/forms/form_password_field.dart';
 import 'package:my_finances_app/core/forms/form_text_field.dart';
 import 'package:my_finances_app/core/forms/form_gap.dart';
 import 'package:my_finances_app/core/forms/form_title.dart';
+import 'package:my_finances_app/core/pages/page.dart';
 import 'package:my_finances_app/core/ui/link_button.dart';
 import 'package:my_finances_app/pages/home/home_page.dart';
 import 'package:my_finances_app/requests/api_error.dart';
@@ -35,8 +36,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StyledForm(
+    return PageWrapper(
+      child: StyledForm(
         children: [
           FormTitle(title: 'Register to My Finances'),
           if (_generalError != null) ...[
